@@ -3,6 +3,8 @@ name = "localoco"
 version = "0.1.0"
 edition = "2021"
 author = "27Onion Nebell"
+license = "MIT"
+description = "A utility library for internationlization in Rust. "
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
