@@ -1,5 +1,6 @@
 pub mod strings;
 pub mod compiler;
+pub mod util;
 
 /// This module contains some utilities for buildscript.
 pub mod buildscript;
