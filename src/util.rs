@@ -1,3 +1,5 @@
+//! This module contains some utility functions that you may use in your application.
+
 use std::{path::{Path, PathBuf}, io::Read};
 
 use crate::strings::Strings;
@@ -17,6 +19,11 @@ pub fn load_strings<P: AsRef<Path>>(path: P, name: &str) -> Result<Strings, std:
 }
 
 /// Insert contents into the placeholders in the string.
+/// A brief example of a string with placeholders:
+/// ```
+/// "Placeholder is a {0} with something that needs to be inserted {1}. {{{{}}}} can be used when
+/// you want to express {{ or }}"
+/// ```
 pub fn insert(fmt: &str, args: &[&str]) -> String {
     let mut result = String::new();
     let mut buffer = String::new();
@@ -28,6 +35,9 @@ pub fn insert(fmt: &str, args: &[&str]) -> String {
                 match i {
                     '{' => {
                         state = 1;
+                    }
+                    '}' => {
+                        state = 3;
                     }
                     _ => {
                         result.push(i);
@@ -55,12 +65,33 @@ pub fn insert(fmt: &str, args: &[&str]) -> String {
                         buffer.push(i);
                     }
                     '}' => {
-                        result.push_str(args[str::parse::<usize>(&buffer).expect("Invalid number format")]);
+                        if let Ok(idx) = str::parse::<usize>(&buffer) {
+                            if idx < args.len() {
+                                result.push_str(args[idx]);
+                            } else {
+                                result.push_str("<failed insertion due to array out-of-range>")
+                            }
+                        } else {
+                            result.push_str("<failed insertion due to invalid number format>")
+                        }
                         buffer = String::new();
                         state = 0;
                     }
                     _ => {
-                        panic!("Invalid format string. ");
+                        return "<invalid format>".into();
+                    }
+                }
+            }
+            3 => {
+                match i {
+                    '}' => {
+                        buffer.push('}');
+                        state = 0;
+                    }
+                    any => {
+                        buffer.push('}');
+                        buffer.push(any);
+                        state = 0;
                     }
                 }
             }

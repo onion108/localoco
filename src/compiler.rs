@@ -1,3 +1,6 @@
+//! This module contains a function that compiles strings files in JSON into their binary
+//! representation for faster loading at runtime.
+
 use std::fmt::Display;
 
 use json::JsonValue;

@@ -1,3 +1,6 @@
+//! This module contains utilify functions for build scripts to compile json files into binary
+//! files.
+
 use std::{fs::OpenOptions, io::Read};
 
 use crate::compiler::compile;

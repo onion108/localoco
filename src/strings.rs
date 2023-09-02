@@ -1,3 +1,6 @@
+//! This module contains things about strings data, which is basically a data structure represents
+//! a strings file at runtime.
+
 use std::collections::HashMap;
 
 use json::{JsonValue, object};
@@ -48,7 +51,7 @@ impl Strings {
         Ok(result)
     }
 
-    /// Loads from a compiled byte.
+    /// Loads from a byte array which contains compiled string.
     pub fn load(bytes: &[u8]) -> Result<Self, ParseError> {
         let mut indexer = 0;
         while indexer <= bytes.len() {

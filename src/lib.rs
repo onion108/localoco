@@ -1,3 +1,14 @@
+//! # LocaLoco
+//! Localoco is a simple library that brings the ability of translating strings to your
+//! application. The core of it is to use a **translation key** to replace the string to be
+//! displayed and then load a specified **strings file** (according to the language/region
+//! settings).
+//!
+//! To ensure the loading of the so-called "string file" is fast, we compile it into a binary form
+//! so that it will be easier to parse at runtime. This work could be done as your Rust code being
+//! compiled. The strings file will be originally written in json, which is a human-readable text
+//! format, and finally transpiled into a binary form, being ready to be loaded at runtime.
+
 pub mod strings;
 pub mod compiler;
 pub mod util;
