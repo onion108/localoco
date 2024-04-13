@@ -5,7 +5,7 @@ use std::collections::HashMap;
 
 use json::{JsonValue, object};
 
-use crate::compiler::ParseError;
+use crate::{compiler::ParseError, locale_names};
 
 /// A structure representing strings data.
 #[derive(Clone, Debug)]
@@ -24,6 +24,11 @@ impl Strings {
             lang_name: lang_name.to_string(),
             data: HashMap::new(),
         }
+    }
+
+    /// Find locale name by locale id.
+    pub fn find_locale_name(locale_id: &str) -> &str {
+        return locale_names::find_locale_name(locale_id);
     }
 
     fn parse(content: &[u8]) -> Result<Self, ParseError> {
