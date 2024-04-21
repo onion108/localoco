@@ -1,6 +1,6 @@
 [package]
 name = "localoco"
-version = "0.1.4"
+version = "0.2"
 edition = "2021"
 author = "27Onion Nebell"
 license = "MIT"
