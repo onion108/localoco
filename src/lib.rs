@@ -9,12 +9,13 @@
 //! compiled. The strings file will be originally written in json, which is a human-readable text
 //! format, and finally transpiled into a binary form, being ready to be loaded at runtime.
 
-pub mod strings;
 pub mod compiler;
+pub mod strings;
 pub mod util;
 
 /// This module contains some utilities for buildscript.
 pub mod buildscript;
+pub mod locale_names;
 
 #[cfg(test)]
 #[allow(unused_imports)]
@@ -23,11 +24,11 @@ mod tests {
 
     #[test]
     fn strings() {
-        let mut s = strings::Strings::new("en_US", "English (US)");
+        let mut s = strings::Strings::new("en_US", strings::Strings::find_locale_name("en_US"));
         s.add_string("ui.hello", "Hello, World! ");
         s.add_string("ui.cancel", "Cancel");
         assert_eq!(s.get_lang_id(), "en_US");
-        assert_eq!(s.get_lang_name(), "English (US)");
+        assert_eq!(s.get_lang_name(), "English (United States)");
         assert_eq!(s.translate("ui.hello"), "Hello, World! ");
         assert_eq!(s.translate("key.not.exist"), "key.not.exist");
         let bytes = compiler::compile(&s.jsonize()).unwrap();
