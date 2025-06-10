@@ -8,7 +8,11 @@ use json::JsonValue;
 /// The error while compiling/decompiling.
 #[derive(Debug, Clone)]
 pub enum ParseError {
+
+    /// Missing translation key.
     MissingKey(String),
+
+    /// The file doesn't have correct format.
     InvalidFormat(String),
     Other(String),
 }
