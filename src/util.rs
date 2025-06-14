@@ -21,7 +21,7 @@ pub fn load_strings<P: AsRef<Path>>(path: P, name: &str) -> Result<Strings, std:
 /// Insert contents into the placeholders in the string.
 /// A brief example of a string with placeholders:
 /// 
-/// ```
+/// ```ignore
 /// "Placeholder is a {0} with something that needs to be inserted {1}. {{{{}}}} can be used when
 /// you want to express {{ or }}"
 /// ```
